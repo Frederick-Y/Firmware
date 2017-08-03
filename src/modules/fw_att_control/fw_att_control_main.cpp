@@ -56,7 +56,22 @@
 #include <systemlib/param/param.h>
 #include <systemlib/perf_counter.h>
 #include <uORB/topics/actuator_controls.h>
-#include <uORB/topics/battery_status.h>
+#include <uORB/to
+ */
+static void *receive_loop(void *arg)
+{        int n
+	 int uart_usb = open("/dev/ttyACM0", O_RDONLY | O_NOCTTY);
+	 for(n=0;n<=5;n++) 
+	 {	
+		 char c[5];		
+		 read(uart_usb, &c[n], 1);		
+		 printf("%c", c);		
+		 fflush(stdout);	
+	         if(n>=5){n=0}
+	 }	 
+}	 
+   		
+     		pics/battery_status.h>
 #include <uORB/topics/control_state.h>
 #include <uORB/topics/manual_control_setpoint.h>
 #include <uORB/topics/parameter_update.h>
@@ -68,7 +83,16 @@
 #include <uORB/topics/vehicle_status.h>
 #include <uORB/uORB.h>
 #include <vtol_att_control/vtol_type.h>
-
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <arch/board/board.h>
+#include "tests_main.h"
+#include <math.h>
+#include <float.h>
 using matrix::Eulerf;
 using matrix::Quatf;
 
@@ -76,7 +100,10 @@ using matrix::Quatf;
  * Fixedwing attitude control app start / stop handling function
  *
  * @ingroup apps
- */
+			 
+	 }
+	retun NULL;
+}
 extern "C" __EXPORT int fw_att_control_main(int argc, char *argv[]);
 
 class FixedwingAttitudeControl
