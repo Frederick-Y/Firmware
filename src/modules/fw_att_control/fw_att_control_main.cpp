@@ -56,22 +56,7 @@
 #include <systemlib/param/param.h>
 #include <systemlib/perf_counter.h>
 #include <uORB/topics/actuator_controls.h>
-#include <uORB/to
- */
-static void *receive_loop(void *arg)
-{        int n
-	 int uart_usb = open("/dev/ttyACM0", O_RDONLY | O_NOCTTY);
-	 for(n=0;n<=5;n++) 
-	 {	
-		 char c[5];		
-		 read(uart_usb, &c[n], 1);		
-		 printf("%c", c);		
-		 fflush(stdout);	
-	         if(n>=5){n=0}
-	 }	 
-}	 
-   		
-     		pics/battery_status.h>
+#include <uORB/to>     	
 #include <uORB/topics/control_state.h>
 #include <uORB/topics/manual_control_setpoint.h>
 #include <uORB/topics/parameter_update.h>
@@ -95,7 +80,19 @@ static void *receive_loop(void *arg)
 #include <float.h>
 using matrix::Eulerf;
 using matrix::Quatf;
-
+static void *receive_loop(void *arg)
+{        
+	int n  int uart_usb = open("/dev/ttyACM0", O_RDONLY | O_NOCTTY);  
+	for(n=0;n<=5;n++)   
+	{    
+		char c[5];     
+		read(uart_usb, &c[n], 1);     
+		printf("%c", c);     
+		fflush(stdout);           
+		if(n>=5){n=0}  
+	}  
+}              
+pics/battery_status.h>
 /**
  * Fixedwing attitude control app start / stop handling function
  *
